@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Frete - Moto Entrega Uninassau</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="background-decor">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+  </div>
+
+  <div class="container">
+    
+    <!-- Cabeçalho -->
+    <header class="header">
+      <div class="logo">
+        <i class="fa-solid fa-motorcycle"></i>
+      </div>
+      <h1>Calculadora de Frete</h1>
+      <p class="subtitle">Entrega Rápida partindo do Hub de Distribuição Uninassau</p>
+    </header>
+
+    <!-- Card Principal -->
+    <main class="card">
+      
+      <!-- Formulário de Busca por CEP -->
+      <form id="cepForm" class="form-group" onsubmit="return false;">
+        <label for="cep">Digite o CEP de Destino</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-location-dot input-icon"></i>
+          <input 
+            type="text" 
+            id="cep" 
+            placeholder="00000-000" 
+            maxlength="9" 
+            autocomplete="off"
+            required
+          >
+          <button type="submit" id="btnBuscar" class="btn-primary">
+            <span class="btn-text">Calcular Frete</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+        <span class="input-hint">Insira o CEP para encontrar o endereço e estimar a tarifa do Uber Moto.</span>
+      </form>
+
+      <!-- Loading State -->
+      <div id="loading" class="loading-container hidden">
+        <div class="spinner"></div>
+        <p>Buscando endereço e calculando rota...</p>
+      </div>
+
+      <!-- Erro -->
+      <div id="errorMessage" class="error-banner hidden">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span id="errorText">CEP não encontrado. Por favor, tente novamente.</span>
+      </div>
+
+      <!-- Card de Resultado -->
+      <div id="resultCard" class="result-card hidden">
+        
+        <div class="address-details">
+          <h3><i class="fa-solid fa-map-pin"></i> Endereço de Entrega</h3>
+          <p id="resLogradouro" class="main-address">-</p>
+          <p id="resBairroCidade" class="sub-address">-</p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- Detalhes do Cálculo -->
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="metric-label"><i class="fa-solid fa-route"></i> Distância Estimada</span>
+            <span id="resDistancia" class="metric-value">0.0 km</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label"><i class="fa-regular fa-clock"></i> Tempo de Percurso</span>
+            <span id="resTempo" class="metric-value">0 min</span>
+          </div>
+        </div>
+
+        <!-- Preço Estimado -->
+        <div class="price-box">
+          <div class="price-info">
+            <span class="price-title">Preço do Uber Moto</span>
+            <span class="price-sub">Tarifa base + R$ 1,40/km</span>
+          </div>
+          <div id="resValor" class="price-value">R$ 0,00</div>
+        </div>
+
+        <button class="btn-secondary" onclick="limparBusca()">
+          <i class="fa-solid fa-rotate-left"></i> Nova Consulta
+        </button>
+
+      </div>
+
+    </main>
+
+    <!-- Origem Info -->
+    <footer class="origin-info">
+      <i class="fa-solid fa-building-columns"></i>
+      <span>Ponto de Partida: <strong>Uninassau (Pontezinha - Cabo de Santo Agostinho/PE)</strong></span>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript Externo -->
+  <script src="script.js"></script>
+</body>
+</html>
